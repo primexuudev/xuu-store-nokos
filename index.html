@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XUU STORE | Professional Virtual Numbers</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-dark: #050505;
+            --bg-card: rgba(255, 255, 255, 0.05);
+            --primary: #00f2ea;
+            --secondary: #ff0050;
+            --text-main: #ffffff;
+            --text-muted: #a0a0a0;
+            --success: #00ff88;
+            --danger: #ff4444;
+            --glass-border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+        
+        body { 
+            background: 
+                linear-gradient(rgba(5, 5, 5, 0.85), rgba(5, 5, 5, 0.85)), 
+                url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            color: var(--text-main); 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        #loader { position: fixed; inset: 0; background: var(--bg-dark); z-index: 9999; display: flex; justify-content: center; align-items: center; transition: 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+        .spinner { width: 50px; height: 50px; border: 3px solid var(--bg-card); border-top: 3px solid var(--primary); border-radius: 50%; animation: spin 1s linear infinite; }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        header { 
+            display: flex; justify-content: space-between; align-items: center; 
+            padding: 30px 0; border-bottom: var(--glass-border);
+            position: sticky; top: 0; background: rgba(5,5,5,0.6); backdrop-filter: blur(15px); z-index: 100;
+        }
+        .logo { font-size: 1.6rem; font-weight: 800; letter-spacing: -1.5px; }
+        .logo span { color: var(--primary); text-shadow: 0 0 15px rgba(0,242,234,0.5); }
+        
+        .avatar-btn {
+            width: 40px; height: 40px; border-radius: 50%; 
+            border: 2px solid var(--primary); cursor: pointer; transition: 0.4s;
+            background: url('https://ui-avatars.com/api/?name=Admin&background=00f2ea&color=000') center/cover;
+        }
+
+        .hero { text-align: center; padding: 60px 0 40px; }
+        .hero-avatar {
+            width: 140px; height: 140px; border-radius: 50%; margin: 0 auto 25px;
+            background: url('https://img2.pixhost.to/images/5622/693289258_marceleven.jpg') center/cover;
+            border: 4px solid var(--primary); box-shadow: 0 0 40px rgba(0, 242, 234, 0.3);
+        }
+        .hero h1 { font-size: 3.5rem; font-weight: 800; letter-spacing: -2px; margin-bottom: 15px; }
+
+        .search-box { max-width: 500px; margin: 30px auto; position: relative; }
+        .search-box input {
+            width: 100%; padding: 18px 25px; border-radius: 15px; border: var(--glass-border);
+            background: rgba(255,255,255,0.05); color: #fff; font-size: 1rem; outline: none;
+            backdrop-filter: blur(5px); transition: 0.3s;
+        }
+
+        /* --- TIPS SECTION --- */
+        .tips-container {
+            background: rgba(0, 242, 234, 0.05); border: 1px dashed var(--primary);
+            border-radius: 20px; padding: 25px; margin-bottom: 50px; text-align: left;
+        }
+        .tips-title { color: var(--primary); font-weight: 800; margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; padding-bottom: 60px; }
+        .card { 
+            background: var(--bg-card); backdrop-filter: blur(10px); border: var(--glass-border); 
+            border-radius: 24px; padding: 25px; transition: 0.5s; opacity: 0; transform: translateY(40px);
+        }
+        .card.visible { opacity: 1; transform: translateY(0); }
+        .card:hover { transform: translateY(-10px); border-color: var(--primary); }
+        .card.sold-out { filter: grayscale(1); opacity: 0.6; }
+        
+        .flag-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .flag { font-size: 2.5rem; }
+        .dial-code { background: var(--primary); color: #000; padding: 2px 8px; border-radius: 6px; font-weight: 800; font-size: 0.8rem; }
+        .country-name { font-size: 1.3rem; font-weight: 700; margin-bottom: 5px; }
+        
+        .stats-row { display: flex; justify-content: space-between; margin-bottom: 15px; font-size: 0.85rem; color: var(--text-muted); }
+        .price-tag { font-size: 1.6rem; font-weight: 800; color: var(--primary); margin-bottom: 20px; display: block; }
+        
+        .badge { display: inline-flex; align-items: center; padding: 6px 14px; border-radius: 12px; font-size: 0.75rem; font-weight: 800; margin-bottom: 20px; }
+        .badge-ready { background: rgba(0, 255, 136, 0.1); color: var(--success); border: 1px solid var(--success); }
+        .badge-restock { background: rgba(255, 68, 68, 0.1); color: var(--danger); border: 1px solid var(--danger); }
+
+        .btn-buy { width: 100%; padding: 15px; border-radius: 14px; border: none; font-weight: 700; cursor: pointer; transition: 0.3s; font-size: 1rem; }
+        .btn-buy-ready { background: #fff; color: #000; }
+        .btn-buy-ready:hover { background: var(--primary); transform: scale(1.02); }
+        .btn-buy-sold { background: #222; color: #555; cursor: not-allowed; }
+
+        /* --- ADMIN MODAL --- */
+        #admin-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 1000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(15px); }
+        .admin-content { background: #0d0d0d; width: 95%; max-width: 800px; padding: 30px; border-radius: 30px; border: 1px solid var(--primary); max-height: 90vh; overflow-y: auto; }
+        
+        .admin-form-add { background: #151515; padding: 20px; border-radius: 20px; margin-bottom: 30px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+        .admin-form-add input { padding: 12px; background: #000; border: 1px solid #333; color: #fff; border-radius: 10px; }
+        .full-width { grid-column: span 3; }
+
+        .control-item { display: flex; justify-content: space-between; align-items: center; padding: 15px; background: #151515; margin-bottom: 10px; border-radius: 15px; }
+        .admin-input-num { padding: 8px; background: #000; border: 1px solid #333; border-radius: 8px; text-align: center; color: #fff; width: 60px; }
+        .btn-delete { background: var(--danger); color: white; border: none; padding: 8px 12px; border-radius: 8px; cursor: pointer; }
+
+        /* FAQ */
+        .faq-section { max-width: 800px; margin: 0 auto 50px; }
+        .faq-title { text-align: center; margin-bottom: 30px; font-size: 2rem; color: var(--primary); }
+        .faq-item { background: var(--bg-card); border: var(--glass-border); border-radius: 16px; margin-bottom: 15px; cursor: pointer; }
+        .faq-question { padding: 20px; display: flex; justify-content: space-between; font-weight: 600; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: 0.3s; padding: 0 20px; color: var(--text-muted); }
+        .faq-item.active .faq-answer { max-height: 200px; padding-bottom: 20px; }
+
+        /* --- SOCIAL MEDIA SECTION (NEW) --- */
+        .social-section { text-align: center; margin-top: 60px; padding: 30px 0; border-top: var(--glass-border); }
+        .social-icons { display: flex; justify-content: center; gap: 15px; margin-top: 20px; flex-wrap: wrap; }
+        
+        .social-btn {
+            width: 50px; height: 50px; border-radius: 50%;
+            background: var(--bg-card); border: var(--glass-border);
+            display: flex; align-items: center; justify-content: center;
+            color: var(--text-main); font-size: 1.4rem; text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative; overflow: hidden;
+        }
+
+        /* Hover Effects for Socials */
+        .social-btn:hover { transform: translateY(-5px); color: #fff; border-color: transparent; }
+        
+        .social-btn.wa:hover { background: #25D366; box-shadow: 0 0 20px rgba(37, 211, 102, 0.4); }
+        .social-btn.tg:hover { background: #0088cc; box-shadow: 0 0 20px rgba(0, 136, 204, 0.4); }
+        .social-btn.ig:hover { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); box-shadow: 0 0 20px rgba(220, 39, 67, 0.4); }
+        .social-btn.gh:hover { background: #333; box-shadow: 0 0 20px rgba(100, 100, 100, 0.4); }
+
+        footer { text-align: center; padding: 30px; color: rgba(255,255,255,0.2); font-weight: 600; font-size: 0.9rem; }
+
+        @media (max-width: 600px) {
+            .admin-form-add { grid-template-columns: 1fr 1fr; }
+            .full-width { grid-column: span 2; }
+            .hero h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="loader"><div class="spinner"></div></div>
+
+    <div id="admin-modal">
+        <div class="admin-content">
+            <div id="login-section">
+                <h2 style="text-align:center; margin-bottom: 25px;">Admin Portal</h2>
+                <input type="password" id="admin-pass" style="width:100%; padding:15px; margin-bottom:15px; background:#000; color:#fff; border:1px solid #333; border-radius:10px;" placeholder="Password Admin">
+                <button class="btn-buy btn-buy-ready" style="background: var(--primary)" onclick="checkLogin()">Login Panel</button>
+                <button class="btn-buy" style="background:transparent; color:#555; margin-top:10px;" onclick="closeAdmin()">Batal</button>
+            </div>
+            
+            <div id="control-section" style="display: none;">
+                <h2 style="color: var(--primary); margin-bottom: 10px;">➕ Tambah Negara Baru</h2>
+                <div class="admin-form-add">
+                    <input type="text" id="new-country" placeholder="Nama Negara (Contoh: Canada)">
+                    <input type="text" id="new-flag" placeholder="Emoji Bendera (🇨🇦)">
+                    <input type="text" id="new-code" placeholder="Kode No (Contoh: +1)">
+                    <input type="number" id="new-price" placeholder="Harga (Rp)">
+                    <input type="number" id="new-stock" placeholder="Jumlah Stok">
+                    <input type="number" id="new-sold" placeholder="Terjual">
+                    <button class="btn-buy btn-buy-ready full-width" style="background: var(--success)" onclick="addNewCountry()">Tambahkan Ke List</button>
+                </div>
+
+                <h2 style="color: var(--primary); margin-bottom: 10px;">⚙️ Kelola Stok & Harga</h2>
+                <div id="admin-grid"></div>
+                <button class="btn-buy" style="margin-top: 25px; background: var(--danger); color: #fff;" onclick="logoutAdmin()">Simpan & Logout</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <header>
+            <div class="logo">XUU<span> STORE</span></div>
+            <div class="avatar-btn" onclick="openAdmin()" title="Portal Admin"></div>
+        </header>
+
+        <section class="hero">
+            <div class="hero-avatar"></div>
+            <h1>Virtual Numbers.</h1>
+            <p style="color: var(--text-muted)">Dapatkan nomor virtual all negara dengan otp fast, safe, murah, dan tidak mudah kenon.</p>
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="Cari negara..." onkeyup="filterProducts()">
+            </div>
+        </section>
+
+        <div class="tips-container">
+            <div class="tips-title">💡 Tips Anti Kenon (WA Bot)</div>
+            <p style="font-size: 0.9rem; color: var(--text-muted);">
+                Chat nomor bot duluan pakai nomor utama kalian atau nomor siapa saja, saling balas chat satu sama lain antara nomor utama dan nomor bot kalian kira-kira sampai <b>20 percakapan</b>. Setelah itu diamkan selama <b>10 menit</b> sebelum mulai melakukan test run bot WhatsApp.
+            </p>
+        </div>
+
+        <div class="grid" id="product-grid"></div>
+
+        <section class="faq-section">
+            <h2 class="faq-title">Pertanyaan Umum (FAQ)</h2>
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">Bagaimana cara pembeliannya? <span>▼</span></div>
+                <div class="faq-answer">Pilih negara, klik "Beli Sekarang", dan Anda akan diarahkan ke WhatsApp admin untuk pembayaran.</div>
+            </div>
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">Apakah ada garansi? <span>▼</span></div>
+                <div class="faq-answer">Ya! Garansi ganti nomor jika OTP tidak masuk dalam 5 menit.</div>
+            </div>
+        </section>
+
+        <div class="social-section">
+            <p style="color: var(--text-muted); margin-bottom: 15px; letter-spacing: 1px; text-transform: uppercase; font-size: 0.8rem;">Hubungi & Ikuti Kami</p>
+            <div class="social-icons">
+                <a href="https://whatsapp.com/channel/0029VbCCwS0ADTOOKyDDLd2S target="_blank" class="social-btn wa" title="WhatsApp">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </a>
+                <a href="https://t.me/Primexuu" target="_blank" class="social-btn tg" title="Telegram">
+                    <i class="fa-brands fa-telegram"></i>
+                </a>
+                <a href="https://instagram.com/zyrexndraa" target="_blank" class="social-btn ig" title="Instagram">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+                <a href="https://github.com/primexuudev" target="_blank" class="social-btn gh" title="GitHub">
+                    <i class="fa-brands fa-github"></i>
+                </a>
+            </div>
+        </div>
+
+        <footer>&copy; 2026 xuu Яyuici.</footer>
+    </div>
+
+    <script>
+        const ADMIN_PASSWORD = "110223"; 
+        const WA_NUMBER = "6281388691442"; 
+
+        const defaultProducts = [
+            { id: 1, country: "Indonesia", code: "+62", flag: "🇮🇩", price: 6000, stock: true, sold: 87, stockCount: 101 },
+            { id: 2, country: "Malaysia", code: "+60", flag: "🇲🇾", price: 12000, stock: true, sold: 25, stockCount: 24 },
+            { id: 3, country: "Canada", code: "+1", flag: "🇨🇦", price: 12000, stock: true, sold: 28, stockCount: 36 },
+            { id: 4, country: "Filipina", code: "+63", flag: "🇵🇭", price: 6000, stock: true, sold: 53, stockCount: 41 },
+            { id: 5, country: "Thailand", code: "+66", flag: "🇹🇭", price: 8000, stock: true, sold: 39, stockCount: 21 },
+            { id: 6, country: "Vietnam", code: "+84", flag: "🇻🇳", price: 14000, stock: true, sold: 19, stockCount: 27 },
+            { id: 7, country: "Colombia", code: "+57", flag: "🇨🇴", price: 6000, stock: true, sold: 31, stockCount: 11 },
+        ];
+
+        let products = JSON.parse(localStorage.getItem('vnum_db_v4')) || defaultProducts;
+
+        function formatRupiah(num) {
+            return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(num);
+        }
+
+        function renderStore(filter = "") {
+            const grid = document.getElementById('product-grid');
+            grid.innerHTML = '';
+            const filtered = products.filter(p => p.country.toLowerCase().includes(filter.toLowerCase()));
+            
+            filtered.forEach((item, index) => {
+                const isReady = item.stockCount > 0;
+                grid.innerHTML += `
+                    <div class="card visible">
+                        <div class="flag-row">
+                            <span class="flag">${item.flag}</span>
+                            <span class="dial-code">${item.code}</span>
+                        </div>
+                        <div class="country-name">${item.country}</div>
+                        <div class="stats-row">
+                            <span>🔥 <b>${item.sold}</b> Terjual</span>
+                            <span>Stok: <b>${item.stockCount}</b></span>
+                        </div>
+                        <span class="price-tag">${formatRupiah(item.price)}</span>
+                        <span class="badge ${isReady ? 'badge-ready' : 'badge-restock'}">${isReady ? '● READY' : '✕ HABIS'}</span>
+                        <button class="btn-buy ${isReady ? 'btn-buy-ready' : 'btn-buy-sold'}" 
+                                onclick="${isReady ? `checkout('${item.country}', ${item.price})` : ''}">
+                            ${isReady ? 'Beli Sekarang' : 'Stok Habis'}
+                        </button>
+                    </div>`;
+            });
+        }
+
+        function renderAdmin() {
+            const adminGrid = document.getElementById('admin-grid');
+            adminGrid.innerHTML = '';
+            products.forEach(item => {
+                adminGrid.innerHTML += `
+                    <div class="control-item">
+                        <div style="flex:1"><b>${item.flag} ${item.country}</b> (${item.code})</div>
+                        <div style="display:flex; gap:5px; align-items:center;">
+                            <input type="number" class="admin-input-num" value="${item.price}" onchange="updateData(${item.id}, 'price', this.value)" title="Harga">
+                            <input type="number" class="admin-input-num" value="${item.stockCount}" onchange="updateData(${item.id}, 'stockCount', this.value)" title="Stok">
+                            <button class="btn-delete" onclick="deleteCountry(${item.id})">🗑️</button>
+                        </div>
+                    </div>`;
+            });
+        }
+
+        function addNewCountry() {
+            const name = document.getElementById('new-country').value;
+            const flag = document.getElementById('new-flag').value;
+            const code = document.getElementById('new-code').value;
+            const price = parseInt(document.getElementById('new-price').value);
+            const stock = parseInt(document.getElementById('new-stock').value);
+            const sold = parseInt(document.getElementById('new-sold').value);
+
+            if(!name || !price) return alert("Isi minimal Nama dan Harga!");
+
+            const newObj = {
+                id: Date.now(),
+                country: name,
+                flag: flag || "🌐",
+                code: code || "+?",
+                price: price,
+                stockCount: stock || 0,
+                sold: sold || 0,
+                stock: stock > 0
+            };
+
+            products.push(newObj);
+            saveDB();
+            renderAdmin();
+            renderStore();
+            alert("Negara berhasil ditambahkan!");
+        }
+
+        function deleteCountry(id) {
+            if(confirm("Hapus negara ini dari list?")) {
+                products = products.filter(p => p.id !== id);
+                saveDB();
+                renderAdmin();
+                renderStore();
+            }
+        }
+
+        function updateData(id, field, val) {
+            const p = products.find(x => x.id === id);
+            p[field] = parseInt(val) || 0;
+            saveDB();
+            renderStore();
+        }
+
+        function saveDB() { localStorage.setItem('vnum_db_v4', JSON.stringify(products)); }
+        function filterProducts() { renderStore(document.getElementById('search-input').value); }
+        function checkout(country, price) { window.open(`https://wa.me/${WA_NUMBER}?text=Halo Admin, mau beli Nomor Virtual ${country} seharga ${formatRupiah(price)}`, '_blank'); }
+        function openAdmin() { document.getElementById('admin-modal').style.display = 'flex'; }
+        function closeAdmin() { document.getElementById('admin-modal').style.display = 'none'; }
+        function toggleFaq(el) { el.classList.toggle('active'); }
+        function logoutAdmin() { location.reload(); }
+
+        function checkLogin() {
+            if(document.getElementById('admin-pass').value === ADMIN_PASSWORD) {
+                document.getElementById('login-section').style.display = 'none';
+                document.getElementById('control-section').style.display = 'block';
+                renderAdmin();
+            } else { alert("Password Salah!"); }
+        }
+
+        window.addEventListener('load', () => {
+            setTimeout(() => { document.getElementById('loader').style.display = 'none'; }, 800);
+            renderStore();
+        });
+    </script>
+</body>
+</html>
