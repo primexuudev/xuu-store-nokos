@@ -247,13 +247,13 @@
         const WA_NUMBER = "6281388691442"; 
 
         const defaultProducts = [
-            { id: 1, country: "Indonesia", code: "+62", flag: "🇮🇩", price: 6000, stock: true, sold: 87, stockCount: 101 },
-            { id: 2, country: "Malaysia", code: "+60", flag: "🇲🇾", price: 12000, stock: true, sold: 25, stockCount: 24 },
-            { id: 3, country: "Canada", code: "+1", flag: "🇨🇦", price: 12000, stock: true, sold: 28, stockCount: 36 },
-            { id: 4, country: "Filipina", code: "+63", flag: "🇵🇭", price: 6000, stock: true, sold: 53, stockCount: 41 },
-            { id: 5, country: "Thailand", code: "+66", flag: "🇹🇭", price: 8000, stock: true, sold: 39, stockCount: 21 },
-            { id: 6, country: "Vietnam", code: "+84", flag: "🇻🇳", price: 14000, stock: true, sold: 19, stockCount: 27 },
-            { id: 7, country: "Colombia", code: "+57", flag: "🇨🇴", price: 6000, stock: true, sold: 31, stockCount: 11 },
+            { id: 1, country: "Indonesia", code: "+62", flag: "🇮🇩", price: 6000, stock: false, sold: 87, stockCount: 0 },
+            { id: 2, country: "Malaysia", code: "+60", flag: "🇲🇾", price: 12000, stock: false, sold: 25, stockCount: 0 },
+            { id: 3, country: "Canada", code: "+1", flag: "🇨🇦", price: 12000, stock: false, sold: 28, stockCount: 0 },
+            { id: 4, country: "Filipina", code: "+63", flag: "🇵🇭", price: 6000, stock: false, sold: 53, stockCount: 0 },
+            { id: 5, country: "Thailand", code: "+66", flag: "🇹🇭", price: 8000, stock: true, sold: 39, stockCount: 3 },
+            { id: 6, country: "Vietnam", code: "+84", flag: "🇻🇳", price: 14000, stock: false, sold: 19, stockCount: 0 },
+            { id: 7, country: "Colombia", code: "+57", flag: "🇨🇴", price: 6000, stock: true, sold: 31, stockCount: 4 },
         ];
 
         let products = JSON.parse(localStorage.getItem('vnum_db_v4')) || defaultProducts;
